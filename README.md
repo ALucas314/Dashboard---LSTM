@@ -4,7 +4,7 @@
 [![Git](https://img.shields.io/badge/Git-F05032.svg?style=for-the-badge&logo=Git&logoColor=white)](#)
 [![GitHub](https://img.shields.io/badge/GitHub-181717.svg?style=for-the-badge&logo=GitHub&logoColor=white)](#)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C.svg?style=for-the-badge&logo=Bootstrap&logoColor=white)](https://getbootstrap.com/)
-[![HTML5](https://img.shields.io/badge/HTML5-E34F26.svg?style=for-the-badge&logo=HTML5&logoColor=white)](#)
+[![Python](https://img.shields.io/badge/HTML5-E34F26.svg?style=for-the-badge&logo=HTML5&logoColor=white)](#)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6.svg?style=for-the-badge&logo=CSS3&logoColor=white)](#)
 
 ---
