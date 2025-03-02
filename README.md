@@ -22,7 +22,7 @@
     <img src="lstm 2.png" alt="Exemplo imagem" width="48%">
 </div>
 <br>
-<img src="lstm 3.png" alt="Exemplo imagem" width="90%">
+<img src="lstm 3.png" alt="Exemplo imagem" width="95%">
 
 > Imagem mostrando uma prévia do projeto, se ficou curioso acesse tanto pelo link app ao lado ou escaneie o QRcode.
 
