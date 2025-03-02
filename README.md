@@ -1,6 +1,4 @@
-
-
-## 🏻 Tools and Skills🔗
+## 🛠 Tools and Skills 🔗
 
 [![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC.svg?style=for-the-badge&logo=Visual-Studio-Code&logoColor=white)](#)
 [![Git](https://img.shields.io/badge/Git-F05032.svg?style=for-the-badge&logo=Git&logoColor=white)](#)
@@ -9,8 +7,7 @@
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26.svg?style=for-the-badge&logo=HTML5&logoColor=white)](#)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6.svg?style=for-the-badge&logo=CSS3&logoColor=white)](#)
 
-
-<p>
+---
 
 # Pokedex-Details
 
@@ -20,11 +17,16 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/ALucas314/README-template?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/ALucas314/README-template?style=for-the-badge)
 
-<img src="lstm.png" alt="Exemplo imagem">
-<img src="lstm 2.png" alt="Exemplo imagem">
-<img src="lstm 3.png" alt="Exemplo imagem">
+<div style="display: flex; justify-content: space-between;">
+    <img src="lstm.png" alt="Exemplo imagem" width="48%">
+    <img src="lstm 2.png" alt="Exemplo imagem" width="48%">
+</div>
+<br>
+<img src="lstm 3.png" alt="Exemplo imagem" width="100%">
 
 > Imagem mostrando uma prévia do projeto, se ficou curioso acesse tanto pelo link app ao lado ou escaneie o QRcode.
+
+---
 
 ### Ajustes e melhorias
 
@@ -36,5 +38,3 @@ Basicamente o projeto foi capaz de realizar as seguintes tarefas:
 - [x] Treinamento da rede neural LSTM
 - [x] Carregamento do peso da rede neural LSTM
 - [x] Exibir gráficos sobre o clima
-
-      
