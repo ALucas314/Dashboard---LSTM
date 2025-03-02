@@ -1,20 +1,19 @@
 ## 🛠 Tools and Skills 🔗
 
-[![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC.svg?style=for-the-badge&logo=Visual-Studio-Code&logoColor=white)](#)
-[![Git](https://img.shields.io/badge/Git-F05032.svg?style=for-the-badge&logo=Git&logoColor=white)](#)
-[![GitHub](https://img.shields.io/badge/GitHub-181717.svg?style=for-the-badge&logo=GitHub&logoColor=white)](#)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C.svg?style=for-the-badge&logo=Bootstrap&logoColor=white)](https://getbootstrap.com/)
-[![Python](https://img.shields.io/badge/HTML5-E34F26.svg?style=for-the-badge&logo=HTML5&logoColor=white)](#)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6.svg?style=for-the-badge&logo=CSS3&logoColor=white)](#)
+[![Python](https://img.shields.io/badge/Python-3776AB.svg?style=for-the-badge&logo=Python&logoColor=white)](#)  
+[![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B.svg?style=for-the-badge&logo=Streamlit&logoColor=white)](https://streamlit.io/)  
+[![Git](https://img.shields.io/badge/Git-F05032.svg?style=for-the-badge&logo=Git&logoColor=white)](#)  
+[![GitHub](https://img.shields.io/badge/GitHub-181717.svg?style=for-the-badge&logo=GitHub&logoColor=white)](#)  
+[![VSCode](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC.svg?style=for-the-badge&logo=Visual-Studio-Code&logoColor=white)](#)
 
 ---
 
-# Pokedex-Details
+# Dashboard-Details
 
-![GitHub repo size](https://img.shields.io/github/repo-size/ALucas314/README-template?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/ALucas314/README-template?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/ALucas314/README-template?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/ALucas314/README-template?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/ALucas314/README-template?style=for-the-badge)  
+![GitHub language count](https://img.shields.io/github/languages/count/ALucas314/README-template?style=for-the-badge)  
+![GitHub forks](https://img.shields.io/github/forks/ALucas314/README-template?style=for-the-badge)  
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/ALucas314/README-template?style=for-the-badge)  
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/ALucas314/README-template?style=for-the-badge)
 
 <div style="display: flex; justify-content: space-between;">
@@ -30,11 +29,15 @@
 
 ### Ajustes e melhorias
 
-Basicamente o projeto foi capaz de realizar as seguintes tarefas:
+O projeto foi capaz de realizar as seguintes tarefas:
 
-- [x] Animações simples 1
-- [x] Responsividade 2
-- [x] Conexão com o banco de dados
-- [x] Treinamento da rede neural LSTM
-- [x] Carregamento do peso da rede neural LSTM
-- [x] Exibir gráficos sobre o clima
+- [x] Animações simples  
+- [x] Responsividade  
+- [x] Conexão com o banco de dados  
+- [x] Treinamento da rede neural LSTM  
+- [x] Carregamento do peso da rede neural LSTM  
+- [x] Exibição de gráficos sobre o clima  
+
+> O projeto utiliza **Python** e a biblioteca **Streamlit** para construir a interface interativa. Ferramentas como **Git**, **GitHub** e **Visual Studio Code** foram utilizadas no desenvolvimento.
+
+---
