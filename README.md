@@ -21,6 +21,8 @@
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/ALucas314/README-template?style=for-the-badge)
 
 <img src="lstm.png" alt="Exemplo imagem">
+<img src="lstm 2.png" alt="Exemplo imagem">
+<img src="lstm 3.png" alt="Exemplo imagem">
 
 > Imagem mostrando uma prévia do projeto, se ficou curioso acesse tanto pelo link app ao lado ou escaneie o QRcode.
 
@@ -30,12 +32,9 @@ Basicamente o projeto foi capaz de realizar as seguintes tarefas:
 
 - [x] Animações simples 1
 - [x] Responsividade 2
+- [x] Conexão com o banco de dados
+- [x] Treinamento da rede neural LSTM
+- [x] Carregamento do peso da rede neural LSTM
+- [x] Exibir gráficos sobre o clima
 
       
-<img src="lstm.png" alt="css3" width="200" height="200"/>
-
-## 🚀 Link do site copie e cole no navegador!
-
-```
-https://pokedex-details.vercel.app/
-```
