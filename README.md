@@ -29,7 +29,6 @@
 <br>
 <img src="lstm 3.png" alt="Exemplo imagem" width="96%">
 
-> Imagem mostrando uma prévia do projeto, se ficou curioso acesse tanto pelo link app ao lado ou escaneie o QRcode.
 
 ---
 
