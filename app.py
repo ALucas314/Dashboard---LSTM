@@ -6,10 +6,8 @@ import matplotlib.pyplot as plt
 import streamlit as st
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense, Dropout, Bidirectional
-from tensorflow.keras.optimizers import Adam
 from sklearn.metrics import mean_squared_error
+from tensorflow.keras.models import load_model
 import sqlalchemy
 
 # Configurações iniciais
@@ -30,14 +28,6 @@ def carregar_dados():
     except Exception as err:
         st.error(f"Erro ao carregar os dados: {err}")
         return None
-
-# Caminho para o arquivo .pkl
-model_pkl_file = "pesoLSTM.pkl"
-
-# Função para salvar o modelo em um arquivo .pkl
-def salvar_modelo(model, scaler, arquivo_pkl):
-    with open(arquivo_pkl, 'wb') as file:
-        pickle.dump({'model': model, 'scaler': scaler}, file)
 
 # Função para carregar o modelo de um arquivo .pkl
 @st.cache_resource
@@ -92,52 +82,41 @@ if data is not None and not data.empty:
     X_test = X_test.reshape(X_test.shape[0], X_test.shape[1], 1)
 
     # Verificar se o modelo já foi salvo
-    model_data = carregar_modelo(model_pkl_file)
+    model_data = carregar_modelo('pesoLSTM.pkl')
     if model_data:
         st.sidebar.write("Carregando modelo salvo...")
         model = model_data['model']
         scaler = model_data['scaler']
     else:
-        st.sidebar.write("Treinando modelo LSTM...")
-        model = Sequential()
-        model.add(Bidirectional(LSTM(units=120, return_sequences=True), input_shape=(X_train.shape[1], 1)))
-        model.add(Dropout(0.4))
-        model.add(LSTM(units=120, return_sequences=False))
-        model.add(Dropout(0.4))
-        model.add(Dense(units=1))
-        optimizer = Adam(learning_rate=0.0005)
-        model.compile(optimizer=optimizer, loss='mean_squared_error')
-
-        model.fit(X_train, y_train, epochs=70, batch_size=32, verbose=1)
-        salvar_modelo(model, scaler, model_pkl_file)
-        st.sidebar.write("Modelo treinado e salvo com sucesso!")
+        st.sidebar.write("Modelo não encontrado. Treine o modelo primeiro.")
+        st.stop()
 
     # Previsões
     y_pred = model.predict(X_test)
     y_pred_rescaled = scaler.inverse_transform(y_pred)
     y_test_rescaled = scaler.inverse_transform([y_test])
 
-    mse_lstm = mean_squared_error(y_test_rescaled[0], y_pred_rescaled)
-    st.sidebar.write(f'Mean Squared Error (MSE) - LSTM: {mse_lstm}')
-
-    # Previsão de amanhã
-    last_data = data_scaled[-time_step:]
-    last_data = last_data.reshape(1, time_step, 1)
-    tomorrow_prediction_scaled = model.predict(last_data)
-    tomorrow_prediction = scaler.inverse_transform(tomorrow_prediction_scaled)
-    st.sidebar.write(f'Previsão de temperatura para amanhã: {tomorrow_prediction[0][0]:.2f}°C')
-
     # Média da temperatura
     media_temperatura = weather_data['TEMPERATURA DO AR - BULBO SECO, HORARIA (°C)'].mean()
     st.sidebar.write(f'Média da temperatura: {media_temperatura:.2f}°C')
 
+    # Cálculo do MSE (Erro Quadrático Médio)
+    mse_lstm = mean_squared_error(y_test_rescaled[0], y_pred_rescaled)
+    st.sidebar.write(f'Mean Squared Error (MSE) - LSTM: {mse_lstm:.4f}')
+
+    # Previsão para amanhã (próxima temperatura)
+    last_data = data_scaled[-time_step:].reshape(1, time_step, 1)
+    prediction = model.predict(last_data)
+    prediction_rescaled = scaler.inverse_transform(prediction)
+    st.sidebar.write(f'Previsão de Temperatura para Amanhã: {prediction_rescaled[0][0]:.2f}°C')
+
     # Layout dos gráficos
     st.subheader("Visualizações Gráficas")
 
-    # Criar colunas para organizar os gráficos
+    # Dividindo a tela em 2 colunas para os gráficos lado a lado
     col1, col2 = st.columns(2)
 
-    # Gráfico de previsão
+    # Gráfico de previsão - Comparação entre Temperatura Real e Previsões LSTM
     with col1:
         st.markdown("### Comparação entre Temperatura Real e Previsões LSTM")
         fig = plt.figure(figsize=(8, 4))  # Tamanho menor
@@ -150,30 +129,36 @@ if data is not None and not data.empty:
         plt.grid(True, linestyle='--', alpha=0.7)
         st.pyplot(fig)
 
-    # Gráfico de linha com sombreamento
+    # Gráfico de Temperatura ao Longo do Tempo (Agora com número do dia)
     with col2:
         st.markdown("### Temperatura ao Longo do Tempo")
-        fig2 = plt.figure(figsize=(8, 4))  # Tamanho menor
-        plt.plot(weather_data['Data'], weather_data['TEMPERATURA DO AR - BULBO SECO, HORARIA (°C)'], label='Temperatura', color='green', linewidth=2)
-        plt.fill_between(weather_data['Data'], weather_data['TEMPERATURA DO AR - BULBO SECO, HORARIA (°C)'], color='green', alpha=0.1)
+        fig_temp = plt.figure(figsize=(8, 4))  # Tamanho adequado para ajustar
+        # Usando apenas o número do dia
+        days = weather_data['Data'].dt.day
+        plt.plot(days, weather_data['TEMPERATURA DO AR - BULBO SECO, HORARIA (°C)'], label='Temperatura', color='green', linewidth=2)
         plt.title('Temperatura ao Longo do Tempo', fontsize=14)
-        plt.xlabel('Data', fontsize=10)
-        plt.ylabel('Temperatura (°C)', fontsize=10)
-        plt.legend(fontsize=10)
+        plt.xlabel('Dia', fontsize=12)
+        plt.ylabel('Temperatura (°C)', fontsize=12)
+        # Agora garantindo que os números dos dias sejam horizontais
+        plt.xticks(rotation=0)
+        plt.legend()
         plt.grid(True, linestyle='--', alpha=0.7)
-        st.pyplot(fig2)
+        st.pyplot(fig_temp)
 
-    # Gráfico de linha com média
+    # Gráfico abaixo: Temperatura ao Longo do Tempo com Média
     st.markdown("### Temperatura ao Longo do Tempo com Média")
-    fig3 = plt.figure(figsize=(10, 4))  # Tamanho menor
-    plt.plot(weather_data['Data'], weather_data['TEMPERATURA DO AR - BULBO SECO, HORARIA (°C)'], label='Temperatura', color='purple', linewidth=2)
-    plt.axhline(media_temperatura, color='red', linestyle='--', label='Média da Temperatura', linewidth=2)
+    fig_temp_media = plt.figure(figsize=(8, 4))  # Tamanho adequado para ajustar
+    media_temperatura = weather_data['TEMPERATURA DO AR - BULBO SECO, HORARIA (°C)'].mean()
+    plt.plot(days, weather_data['TEMPERATURA DO AR - BULBO SECO, HORARIA (°C)'], label='Temperatura', color='green', linewidth=2)
+    plt.axhline(y=media_temperatura, color='orange', linestyle='--', label=f'Média: {media_temperatura:.2f}°C')
     plt.title('Temperatura ao Longo do Tempo com Média', fontsize=14)
-    plt.xlabel('Data', fontsize=10)
-    plt.ylabel('Temperatura (°C)', fontsize=10)
-    plt.legend(fontsize=10)
+    plt.xlabel('Dia', fontsize=12)
+    plt.ylabel('Temperatura (°C)', fontsize=12)
+    # Agora garantindo que os números dos dias sejam horizontais
+    plt.xticks(rotation=0)
+    plt.legend()
     plt.grid(True, linestyle='--', alpha=0.7)
-    st.pyplot(fig3)
+    st.pyplot(fig_temp_media)
 
 else:
     st.warning("Nenhum dado disponível para exibição.")
